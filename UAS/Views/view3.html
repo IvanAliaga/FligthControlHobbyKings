@@ -1,0 +1,95 @@
+<!--html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/x-icon" href="../static/image/logo_UAS.png"/>
+	<title>Via Streaming</title>
+	<link rel="stylesheet" href="../static/CSS/estilo.css" type="text/css"/>
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="../static/Scripts/jquery-1.10.1.js"></script>
+	<script type="text/javascript" src="../static/CSS/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../static/Scripts/js_v3.js"></script>
+</head>
+<body>
+	<center>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header ">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			        <span class="sr-only">Desplegar navegación</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="view1.html">
+			    	<img class="logo" src="../static/image/logo_UAS.png">
+			    </a>
+		  	</div>
+		  	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		    	<ul class="nav navbar-nav">
+		      		<li class="active"><a href="view1.html">Mapa</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view2.html">Mando de Control</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view3.html">Via Streaming</a></li>
+		    	</ul>
+		  	</div>
+		</nav>	
+		<div class="divPrincipal" style="float: left;">
+			<div class="divVista">
+				<img src="http://192.168.0.32:90/?action=stream"/>
+				<div class="divBtnV">
+		<input type="button" onclick=downloadURI("http://192.168.0.32:90/?action=snapshot","pic.png") value="Click!"/>
+					
+				</div>
+			</div>
+			<div id="divImg">
+			</div>
+		</div>			
+	</center>
+</body>
+</html-->
+
+
+
+<html>
+<head>
+	<meta charset="utf-8">
+<title>Via Streaming</title>
+	<link rel="stylesheet" href="../static/CSS/estilo.css" type="text/css"/>
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="../static/Scripts/jquery-1.10.1.js"></script>
+	<script type="text/javascript" src="../static/CSS/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../static/Scripts/js_v3.js"></script>
+</head>
+<body>
+	<center>
+		<nav class="navbar navbar-inverse" role="navigation">
+		  <div class="navbar-header">
+		    <a class="navbar-brand" href="view1.html">
+		    	<img class="logo" src="../static/image/logo_UAS.png">
+		    </a>
+		  </div>
+		 
+		  <div class="collapse navbar-collapse navbar-ex1-collapse">
+		    <ul class="nav navbar-nav">
+		      	<li><a href="view1.html">Mapa</a></li>
+		      	<li><a href="view2.html">Mando de Control</a></li>
+		      	<li  class="active"><a href="view3.html">Via Streaming</a></li>
+		    </ul>
+		  </div>
+		</nav>
+		<div class="divPrincipal">
+			<div class="divVista">
+				<img src="http://192.168.1.37:9000/?action=stream"/>
+				<div class="divBtnV">
+					<div class="rBtn">
+						<button class="btn btn-primary btn-sm dropdown-toggle" type="button" onclick=downloadURI("http://192.168.1.37:9000/?action=snapshot","pic.png")>Captura Foto</button>
+					</div>
+				</div>
+			<div id="divImg">
+			</div>
+		</div>			
+	</center>
+</body>
+</html>

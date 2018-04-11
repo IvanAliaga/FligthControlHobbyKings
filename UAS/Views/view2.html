@@ -1,0 +1,147 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/x-icon" href="../static/image/logo_UAS.png"/>
+	<title>Mando de Control</title>
+	<link rel="stylesheet" href="../static/CSS/estilo.css" type="text/css"/>
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="../static/Scripts/jquery-1.10.1.js"></script>
+	<script type="text/javascript" src="../static/CSS/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	function runAnimation(){
+    	    window.requestAnimationFrame(runAnimation);
+	    window.addEventListener("gamepadconnected", function(e) {
+  		console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+    		e.gamepad.index, e.gamepad.id,
+	        e.gamepad.buttons.length, e.gamepad.axes.length);
+	    }); 
+	   
+	}
+	window.requestAnimationFrame(runAnimation);
+	</script>
+</head>
+<body>
+	<center>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header ">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			        <span class="sr-only">Desplegar navegación</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="view1.html">
+			    	<img class="logo" src="../static/image/logo_UAS.png">
+			    </a>
+		  	</div>
+		  	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		    	<ul class="nav navbar-nav">
+		      		<li class="active"><a href="view1.html">Mapa</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view2.html">Mando de Control</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view3.html">Via Streaming</a></li>
+		    	</ul>
+		  	</div>
+		</nav>
+		<div class="divPrincipal">
+			<div class="divCont panel panel-primary">
+				<div class="panel-heading">
+				    <h3 class="panel-title">Controles</h3>
+				</div>
+				<div class="panel-body">
+					<div class="panel-body">
+						<div class="divEsts">
+							<div class="panel panel-success divEst">
+								<div class="panel-heading">Throtlle</div>
+								<div class="panel-body">
+									<label id="lblTro"></label>
+								</div>
+							</div>
+							<div class="panel panel-success divEst">
+								<div class="panel-heading">Pitch</div>
+								<div class="panel-body">
+									<label id="lblPit"></label>
+								</div>
+							</div>
+							<div class="panel panel-success divEst">
+								<div class="panel-heading">Roll</div>
+								<div class="panel-body">
+									<label id="lblRol"></label>
+								</div>
+							</div>
+							<div class="panel panel-success divEst">
+								<div class="panel-heading">Yaw</div>
+								<div class="panel-body">
+									<label id="lblYaw"></label>
+								</div>
+							</div>
+							<div>
+								<button class="btn btn-danger btn-lg">Auxiliar</button>
+								<button class="btn btn-danger btn-lg">Armar</button>
+							</div>
+							<div class="input-group mar">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-flash"> <font face="arial" > Throttle: &nbsp</font> </span>
+								</span>
+								<input type="range" min="0" max="100" value="0" step="1" id="rangeTro" style="margin: 4px" onclick="valores();">
+								<script type="text/javascript">
+									document.getElementById('rangeTro').addEventListener('change',function(){
+										var iValor=this.value;
+										var objLeyenda=document.getElementById('valueTro');
+										objLeyenda.innerHTML=iValor;
+									});
+								</script>
+								<span class="input-group-addon" id="valueTro"> 0</span>								</div>
+							<div class="input-group mar">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-flash"> <font face="arial" > Pit: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font> </span>
+								</span>
+								<input type="range" min="0" max="100" value="0" step="1" id="rangePit" style="margin: 4px">
+								<span class="input-group-addon" id="valuePit"> 0</span>
+								<script type="text/javascript">
+									document.getElementById('rangePit').addEventListener('change',function(){
+										var iValor=this.value;
+										var objLeyenda=document.getElementById('valuePit');
+										objLeyenda.innerHTML=iValor;
+									});
+								</script>
+							</div>
+							<div class="input-group mar">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-flash"> <font face="arial" > Roll: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font> </span>
+								</span>
+								<input type="range" min="0" max="100" value="0" step="1" id="rangeRol" style="margin: 4px">
+								<span class="input-group-addon" id="valueRol"> 0</span>	
+								<script type="text/javascript">
+									document.getElementById('rangeRol').addEventListener('change',function(){
+										var iValor=this.value;
+										var objLeyenda=document.getElementById('valueRol');
+										objLeyenda.innerHTML=iValor;
+									});
+								</script>
+							</div>
+							<div class="input-group mar">
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-flash"> <font face="arial" > Yaw: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</font> </span>
+								</span>
+								<input type="range" min="0" max="100" value="0" step="1" id="rangeYaw" style="margin: 4px">
+								<span class="input-group-addon" id="valueYaw"> 0</span>	
+								<script type="text/javascript">
+									document.getElementById('rangeYaw').addEventListener('change',function(){
+										var iValor=this.value;
+										var objLeyenda=document.getElementById('valueYaw');
+										objLeyenda.innerHTML=iValor;
+									});
+								</script>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>	
+	</center>
+</body>
+</html>

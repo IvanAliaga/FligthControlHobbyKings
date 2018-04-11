@@ -1,0 +1,204 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="shortcut icon" type="image/x-icon" href="../image/logo_UAS.png"/>
+	<title>Mapa UAS</title>
+	<link rel="stylesheet" href="../static/CSS/estilo.css" type="text/css"/>
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../static/CSS/bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="../static/Scripts/jquery-1.10.1.js"></script>
+	<script type="text/javascript" src="../static/CSS/bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+	<script type="text/javascript" src="../static/Scripts/js_v1.js" ></script>
+	<!--<script type="text/javascript">
+ 	function webs(){
+	var ws = new WebSocket("ws://192.168.0.32:8080/websocket");
+        ws.onmessage = function (evt) {
+            var str =evt.data;      
+            var objson = JSON.parse(str);
+            lat = objson[0];
+            lng = objson[1];      
+        };
+	}
+	</script>
+	-->
+</head>
+<body>
+	<center>
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="navbar-header ">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			        <span class="sr-only">Desplegar navegación</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="view1.html">
+			    	<img class="logo" src="../static/image/logo_UAS.png">
+			    </a>
+		  	</div>
+		  	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		    	<ul class="nav navbar-nav">
+		      		<li class="active"><a href="view1.html">Mapa</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view2.html">Mando de Control</a></li>
+		      		<li class="divider"></li>
+		      		<li><a href="view3.html">Via Streaming</a></li>
+		    	</ul>
+		  	</div>
+		</nav>
+		<div class="divPrincipal">
+			<div class="divMap" id="map">
+			</div>
+			<div style="width: 300px; float: left; margin-left: 90px;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+					    <h3 class="panel-title">Recorrido</h3>
+					</div>
+					<div class="panel-body">
+						<div class="input-group">
+							<span class="input-group-addon">
+						  		<span class="glyphicon glyphicon-send"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Velocidad Inicial"	id="velIni" onkeypress="return isNumber(event);">
+							<span class="input-group-addon">m/s</span>
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-flash"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Duracion Bateria" id="durBat" onkeypress="return isNumber(event);">
+							<span class="input-group-addon"> min.</span>	
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-warning-sign"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Porcentaje de Error" id="prcErro" onkeypress="return isNumber(event);">
+							<span class="input-group-addon"> %</span>	
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-signal"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Altura" id="altUra" onkeypress="return isNumber(event);">
+							<span class="input-group-addon"> metros</span>	
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon">
+						  		<span class="glyphicon glyphicon-road"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Recorrido Maximo" disabled	id="recorridoMax">
+							<span class="input-group-addon"> metros aprox.</span>	
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-addon">
+						  		<span class="glyphicon glyphicon-flag"></span>
+							</span>
+							<input type="text" class="form-control" placeholder="Recorrido Sobraante" disabled	id="recorridoSob">
+							<span class="input-group-addon"> metros aprox.</span>	
+						</div>
+						<br>
+						<div>
+							<button class="btn btn-primary" onclick="createRecord()">
+								<span class="glyphicon glyphicon-globe">
+									<font face="arial" size=1>Crear Rango</font>
+								</span>
+							</button>
+							<button class="btn btn-danger" onclick="deleteRecord()">
+								<span class="glyphicon glyphicon-trash">
+									<font face="arial" size=1>Elimnar Rango</font>
+								</span>
+							</button>
+						</div>
+						<br>
+						<div>
+							<button  class="btn btn-success" style="width: 90%" onclick="viewRange()">
+								<span class="glyphicon glyphicon-eye-open">
+									<font face="arial" size=1>Visualizar Rango</font>
+								</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="width: 300px; float: left; margin-left: 90px;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Opciones de WayPoints</h3>
+					</div>
+					<div class="panel-body">
+						<div>
+							<button class="btn btn-primary" onclick="goHome()">
+								<span class="glyphicon glyphicon-home">
+									<font face="arial" size=1>Ir a Casa</font>
+								</span>
+							</button>
+							<button class="btn btn-success" onclick="goFirst()">
+								<span class="glyphicon glyphicon-map-marker">
+									<font face="arial" size=1>Ir a Primer Point</font>
+								</span>
+							</button>
+						</div>
+						<br>
+						<div>
+							<button class="btn btn-primary" onclick="deleteLast()">
+								<span class="glyphicon glyphicon-trash">
+									<font face="arial" size=1>Eliminar Ultimo</font>
+								</span>
+							</button>
+							<button class="btn btn-danger" onclick="deleteAll()">
+								<span class="glyphicon glyphicon-trash">
+									<font face="arial" size=1>Elimnar Todos</font>
+								</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="width: 1090px; float: left; margin-left: 90px;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Informacion de WayPoints</h3>
+					</div>
+					<div class="panel-body">
+						<div class="divLI">
+							<div class="divNumLat">
+								<div class="divIDir" id="divDir">
+									<h4>Puntos</h4>
+									<input id="ptn-0" type="text" disabled></input>
+								</div>
+								<div class="divILat" id="divLat">
+									<h4>Latitud</h4>
+									<input id="lat-0" type="text" disabled></input>
+								</div>
+							</div>
+							<div class="divLogAlt">
+								<div class="divILon" id="divLon">
+									<h4>Longitud</h4>
+									<input id="lon-0" type="text" disabled></input>
+								</div>
+								<div class="divIAlt" id="divAlt">
+									<h4>Altitud</h4>
+									<input id="alt-0" type="text" disabled></input>
+								</div>
+							</div>
+						</div>		
+						<div class="divRI">
+							<div class="divIDis" id="divDis">
+								<h4>Distancia</h4>
+								<input id="rec-0" type="text" disabled value="0"></input>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</center>
+</body>
+</html>
